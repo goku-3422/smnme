@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heart Surprise</title>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<style>
+  body {
+    text-align: center;
+    background: #d10931;
+    font-family: Arial, sans-serif;
+  }
+  #heart {
+    width: 100%;
+    height: 90vh;
+  }
+  #photo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px; /* size of the photo */
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+    z-index: 10;
+  }
+</style>
+</head>
+<body>
+
+<h2>💖 Just for You 💖</h2>
+<div id="heart"></div>
+<img id="photo" src="her_photo.jpeg" alt="Surprise">
+
+<script>
+  function plotHeart() {
+    let tValues = [];
+    let xValues = [];
+    let yValues = [];
+    let steps = 200; // smoothness of animation
+    let delay = 10; // ms delay between points
+
+    function heartX(t) {
+      return 16 * Math.sin(t) ** 3;
+    }
+    function heartY(t) {
+      return 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
+    }
+
+    let trace = {
+      x: [],
+      y: [],
+      mode: 'lines',
+      line: { color: 'red', width: 4 }
+    };
+
+    let layout = {
+      xaxis: { visible: false },
+      yaxis: { visible: false, scaleanchor: 'x' },
+      margin: { t: 0, b: 0, l: 0, r: 0 },
+      plot_bgcolor: '#d10931',
+      paper_bgcolor: '#ffe6eb'
+    };
+
+    Plotly.newPlot('heart', [trace], layout);
+
+    let i = 0;
+    let interval = setInterval(() => {
+      let t = Math.PI - (i / steps) * 2 * Math.PI; // left to right
+      trace.x.push(heartX(t));
+      trace.y.push(heartY(t));
+      Plotly.update('heart', { x: [trace.x], y: [trace.y] });
+
+      i++;
+      if (i > steps) {
+        clearInterval(interval);
+        document.getElementById('photo').style.opacity = 1; // show photo after heart is drawn
+      }
+    }, delay);
+  }
+
+  plotHeart();
+</script>
+
+</body>
+</html>

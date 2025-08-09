@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>For You ❤️</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #ffe6e6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        input {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px 20px;
+            background: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #e60000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Hey Beautiful 💖</h2>
+        <p>What's your name?</p>
+        <input type="text" id="name" placeholder="Enter your name">
+
+        <p>Who is your favourite person?</p>
+        <input type="text" id="fav" placeholder="Type their name">
+
+        <button onclick="checkAnswer()">Submit</button>
+    </div>
+
+    <script>
+        function checkAnswer() {
+            let name = document.getElementById('name').value.trim();
+            let fav = document.getElementById('fav').value.trim().toLowerCase();
+
+            alert("You entered: " + name + " | " + fav); // You can see her answer here
+
+            if (fav.includes("deeptendu") || fav.includes("souvik")) {
+                window.location.href = "love.html";
+            } else {
+                alert("Thanks ❤️");
+                window.close();
+            }
+        }
+    </script>
+</body>
+</html>
